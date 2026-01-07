@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: dashboard-config
+  namespace: dashboard
+data:
+  # Dashboard configuration
+  REFRESH_INTERVAL_CLOCK: "60"
+  REFRESH_INTERVAL_WEATHER: "1800"
+  REFRESH_INTERVAL_CALENDAR: "900"
+  REFRESH_INTERVAL_BUDGET: "3600"
+  TIMEZONE: "America/New_York"
