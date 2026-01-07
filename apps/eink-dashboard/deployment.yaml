@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: eink-dashboard
-          image: ghcr.io/andresmendez/eink-dashboard:latest
+          image: ghcr.io/andresfelipemendez/eink-dashboard:latest
           ports:
             - containerPort: 8080
           resources:
