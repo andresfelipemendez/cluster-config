@@ -7,4 +7,3 @@ resources:
   - image-updater-app.yaml
   - external-dns-app.yaml
   - castercat-app.yaml
-  - website-app.yaml
