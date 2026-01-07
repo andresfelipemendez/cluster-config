@@ -4,7 +4,7 @@ metadata:
   name: eink-dashboard
   namespace: argocd
   annotations:
-    argocd-image-updater.argoproj.io/image-list: eink=ghcr.io/andresfelipemendez/eink-dashboard
+    argocd-image-updater.argoproj.io/image-list: eink=ghcr.io/andresfelipemendez/eink-dashboard:latest
     argocd-image-updater.argoproj.io/eink.update-strategy: digest
     argocd-image-updater.argoproj.io/write-back-method: git
 spec:
