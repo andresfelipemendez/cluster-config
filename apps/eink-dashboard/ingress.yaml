@@ -12,10 +12,10 @@ spec:
   ingressClassName: nginx
   tls:
     - hosts:
-        - eink.andresmendez.dev
+        - eink.andresfelipemendez.com
       secretName: eink-dashboard-tls
   rules:
-    - host: eink.andresmendez.dev
+    - host: eink.andresfelipemendez.com
       http:
         paths:
           - path: /

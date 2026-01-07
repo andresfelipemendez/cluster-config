@@ -9,10 +9,10 @@ spec:
   ingressClassName: nginx
   tls:
     - hosts:
-        - dashboard.andresmendez.dev
+        - dashboard.andresfelipemendez.com
       secretName: dashboard-tls
   rules:
-    - host: dashboard.andresmendez.dev
+    - host: dashboard.andresfelipemendez.com
       http:
         paths:
           - path: /

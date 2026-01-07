@@ -22,8 +22,8 @@ spec:
           args:
             - --source=ingress
             - --provider=cloudflare
-            - --cloudflare-proxied
             - --domain-filter=andresmendez.dev
+            - --domain-filter=andresfelipemendez.com
             - --domain-filter=castercatcrew.com
             - --policy=upsert-only
             - --registry=txt
