@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: castercat
+  namespace: castercat
+spec:
+  selector:
+    app: castercat
+  ports:
+    - port: 80
+      targetPort: 80

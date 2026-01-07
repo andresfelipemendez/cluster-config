@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: castercat
+  namespace: castercat
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: castercat
+  template:
+    metadata:
+      labels:
+        app: castercat
+    spec:
+      containers:
+        - name: nginx
+          image: nginx:alpine
+          ports:
+            - containerPort: 80
+          resources:
+            limits:
+              memory: "64Mi"
+              cpu: "50m"

@@ -6,3 +6,4 @@ resources:
   - eink-dashboard-app.yaml
   - image-updater-app.yaml
   - external-dns-app.yaml
+  - castercat-app.yaml
