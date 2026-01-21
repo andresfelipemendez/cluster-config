@@ -1,0 +1,24 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: garden-ingress
+  namespace: garden
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+spec:
+  ingressClassName: nginx
+  tls:
+    - hosts:
+        - garden.andresfelipemendez.com
+      secretName: garden-tls
+  rules:
+    - host: garden.andresfelipemendez.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: garden
+                port:
+                  number: 80

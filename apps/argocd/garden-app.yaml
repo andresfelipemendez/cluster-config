@@ -1,0 +1,24 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: garden
+  namespace: argocd
+  annotations:
+    argocd-image-updater.argoproj.io/image-list: garden=ghcr.io/andresfelipemendez/garden:latest
+    argocd-image-updater.argoproj.io/garden.update-strategy: digest
+    argocd-image-updater.argoproj.io/write-back-method: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/andresfelipemendez/cluster-config.git
+    targetRevision: HEAD
+    path: apps/garden
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: garden
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true

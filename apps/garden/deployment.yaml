@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: garden
+  namespace: garden
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: garden
+  template:
+    metadata:
+      labels:
+        app: garden
+    spec:
+      containers:
+        - name: garden
+          image: ghcr.io/andresfelipemendez/garden:latest
+          ports:
+            - containerPort: 80
+          resources:
+            limits:
+              memory: "64Mi"
+              cpu: "50m"
