@@ -1,6 +1,6 @@
 # Cluster Config
 
-GitOps repository for the e-ink dashboard Kubernetes cluster.
+GitOps repository for my personal Kubernetes cluster.
 
 ## Status
 
@@ -9,15 +9,18 @@ GitOps repository for the e-ink dashboard Kubernetes cluster.
 | Kubernetes | ✅ Running | - |
 | ingress-nginx | ✅ Running | - |
 | cert-manager | ✅ Running | - |
-| ArgoCD | ✅ Running | https://argocd.andresmendez.dev |
-| Dashboard | ⬜ Not deployed | https://dashboard.andresmendez.dev |
+| ArgoCD | ✅ Running | https://argocd.andresfelipemendez.com |
+| Garden | ✅ Running | https://garden.andresfelipemendez.com |
+| Dashboard | ✅ Running | https://dashboard.andresfelipemendez.com |
+| E-ink Dashboard | ✅ Running | https://eink.andresfelipemendez.com |
+| Castercat | ✅ Running | https://castercatcrew.com |
 
 ## Cluster Info
 
 | Property | Value |
 |----------|-------|
 | **IP** | 178.156.213.185 |
-| **Domain** | andresmendez.dev |
+| **Domain** | andresfelipemendez.com |
 | **DNS** | Cloudflare |
 | **K8s** | kubeadm v1.35 |
 | **GitOps** | ArgoCD |
@@ -29,19 +32,39 @@ GitOps repository for the e-ink dashboard Kubernetes cluster.
 ```
 cluster-config/
 ├── apps/
-│   ├── argocd/              # ArgoCD ingress (✅ deployed)
+│   ├── argocd/              # ArgoCD apps and ingress
+│   │   ├── ingress.yaml
+│   │   ├── garden-app.yaml
+│   │   ├── eink-dashboard-app.yaml
+│   │   ├── castercat-app.yaml
+│   │   ├── external-dns-app.yaml
+│   │   ├── image-updater-app.yaml
+│   │   └── kustomization.yaml
+│   ├── garden/              # Digital garden (notes)
+│   │   ├── deployment.yaml
+│   │   ├── service.yaml
 │   │   ├── ingress.yaml
 │   │   └── kustomization.yaml
-│   └── dashboard/           # E-ink dashboard app (⬜ pending)
+│   ├── dashboard/           # Personal dashboard
+│   │   ├── deployment.yaml
+│   │   ├── service.yaml
+│   │   ├── ingress.yaml
+│   │   ├── configmap.yaml
+│   │   └── kustomization.yaml
+│   ├── eink-dashboard/      # E-ink display dashboard
+│   │   ├── deployment.yaml
+│   │   ├── service.yaml
+│   │   ├── ingress.yaml
+│   │   └── kustomization.yaml
+│   └── castercat/           # Castercat website
 │       ├── deployment.yaml
 │       ├── service.yaml
 │       ├── ingress.yaml
-│       ├── configmap.yaml
 │       └── kustomization.yaml
 ├── infrastructure/
-│   ├── namespaces/          # (✅ deployed)
-│   ├── ingress-nginx/       # (✅ deployed)
-│   └── cert-manager/        # (✅ deployed)
+│   ├── namespaces/
+│   ├── ingress-nginx/
+│   └── cert-manager/
 │       ├── kustomization.yaml
 │       └── cluster-issuer.yaml
 └── README.md
@@ -88,11 +111,19 @@ kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.pas
 ```
 
 - Username: `admin`
-- URL: [argocd.andresmendez.dev](https://argocd.andresmendez.dev)
+- URL: [argocd.andresfelipemendez.com](https://argocd.andresfelipemendez.com)
 
+
+## Adding a New Service
+
+1. Create `apps/<service-name>/` with deployment, service, ingress, kustomization
+2. Create `apps/argocd/<service-name>-app.yaml`
+3. Add to `apps/argocd/kustomization.yaml`
+4. Push and ArgoCD auto-syncs
 
 ## Notes
 
 - **ingress-nginx** uses `hostNetwork: true` to bind directly to ports 80/443 (single VPS setup)
 - **ClusterIssuer** must be applied separately after cert-manager CRDs are ready
 - **Secrets** are not committed - use `secrets.yaml.example` as template
+- **Image updates** handled by ArgoCD Image Updater (digest strategy)
