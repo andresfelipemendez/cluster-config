@@ -13,3 +13,8 @@ spec:
         - 185.199.109.153
         - 185.199.110.153
         - 185.199.111.153
+    - dnsName: www.andresfelipemendez.com
+      recordTTL: 300
+      recordType: CNAME
+      targets:
+        - andresfelipemendez.github.io
